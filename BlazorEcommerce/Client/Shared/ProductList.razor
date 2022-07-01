@@ -1,5 +1,6 @@
 ﻿@*@inject HttpClient Http*@
 @inject IProductService ProductService
+@implements IDisposable
 
 @if(ProductService.Products == null || ProductService.Products.Count == 0)
 {
@@ -22,7 +23,7 @@ else
                     </a>
                     <p>@product.Description</p>
                     <h5 class="price">
-                        $@product.Price
+                        @*$@product.Price*@
                     </h5>
                 </div>
             </li>
@@ -36,13 +37,25 @@ else
     //private static List<Product> Products = new List<Product>();
 
     // when this component is rendered at first
-    protected override async Task OnInitializedAsync()
-    {
-        //// http
-        //var result = await Http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/Product");
-        //if (result != null && result.Data != null)
-        //    Products = result.Data;
+    // before apply invoke() event function
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    //// http
+    //    //var result = await Http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/Product");
+    //    //if (result != null && result.Data != null)
+    //    //    Products = result.Data;
 
-        await ProductService.GetProducts();
-    }   
+    //    // no category
+    //    await ProductService.GetProducts();
+    //}
+
+    protected override void OnInitialized()
+    {
+        ProductService.ProductsChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProductService.ProductsChanged += StateHasChanged;
+    }
 }
