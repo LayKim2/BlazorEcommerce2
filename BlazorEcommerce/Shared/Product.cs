@@ -18,7 +18,7 @@ namespace BlazorEcommerce.Shared
         public decimal Price { get; set; }
 
         // category model
-        public Category? category { get; set; }
+        public Category? Category { get; set; }
         public int CategoryId { get; set; }
 
     }

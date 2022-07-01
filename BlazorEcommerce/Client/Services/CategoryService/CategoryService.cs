@@ -13,7 +13,10 @@
 
         public async Task GetCategories()
         {
-            throw new NotImplementedException();
+            var response = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>("api/Category");
+
+            if(response != null && response.Data != null)
+                 Categories = response.Data;
         }
     }
 }
