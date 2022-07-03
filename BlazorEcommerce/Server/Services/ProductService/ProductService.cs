@@ -32,8 +32,7 @@
                 .Include(p => p.Variants)
                 .ThenInclude(v => v.ProductType)
                 .FirstOrDefaultAsync(p => p.Id == productId);
-                //.FindAsync(productId);
-                
+            //.FindAsync(productId);
 
             if (product == null)
             {
@@ -61,6 +60,54 @@
 
             return response;
         }
-        
+
+        public async Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
+        {
+            var products = await FindProductsBySearchText(searchText);
+
+            List<string> result = new List<string>();
+
+            foreach(var product in products)
+            {
+                if (product.Ttile.Contains(searchText, StringComparison.OrdinalIgnoreCase)){
+                    result.Add(product.Ttile);
+                }
+
+                if(product.Description != null)
+                {
+                    var punctuation = product.Description.Where(char.IsPunctuation)
+                            .Distinct().ToArray();
+
+                    var words = product.Description.Split()
+                            .Select(s => s.Trim(punctuation));
+
+                    foreach(var word in words)
+                    {
+                        //if(word.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                    }
+                }
+            }
+
+            return new ServiceResponse<List<string>> { Data = result };
+        }
+
+        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await FindProductsBySearchText(searchText)
+            };
+
+            return response;
+        }
+
+        private async Task<List<Product>> FindProductsBySearchText(string searchText)
+        {
+            return await _context.Products
+                                .Where(p => p.Ttile.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower()))
+                                //.Where(p => searchText.Contains(p.Ttile) || searchText.Contains(p.Description))
+                                .Include(p => p.Variants)
+                                .ToListAsync();
+        }
     }
 }

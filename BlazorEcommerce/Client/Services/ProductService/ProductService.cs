@@ -44,6 +44,13 @@ public class ProductService : IProductService
         ProductsChanged.Invoke();
     }
 
+    public Task<ServiceResponse<Product>> SearchProducts(string searchText)
+    {
+        var result = _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/search/{searchText}");
+
+        return result;
+    }
+
     #region noCategoryDisplayProducts
     //public async Task GetProducts()
     //{

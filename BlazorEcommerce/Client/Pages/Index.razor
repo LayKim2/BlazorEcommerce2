@@ -1,7 +1,7 @@
 ﻿@page "/"
 @page "/{categoryUrl}"
 
-@inject IProductService ProjectService
+@inject IProductService ProductService
 
 <PageTitle>My Shop</PageTitle>
 
@@ -13,6 +13,6 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		await ProjectService.GetProducts(CategoryUrl);
+		await ProductService.GetProducts(CategoryUrl);
 	}
 }

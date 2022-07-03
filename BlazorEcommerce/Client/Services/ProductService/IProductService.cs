@@ -10,4 +10,5 @@ public interface IProductService
 
     Task<ServiceResponse<Product>> GetProduct(int productId);
 
+    Task<ServiceResponse<Product>> SearchProducts(string searchText);
 }
