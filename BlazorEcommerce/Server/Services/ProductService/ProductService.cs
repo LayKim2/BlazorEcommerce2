@@ -83,7 +83,12 @@
 
                     foreach(var word in words)
                     {
-                        //if(word.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                        if (word.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                            && !result.Contains(word))
+                        {
+                            result.Add(word);
+                        }
+
                     }
                 }
             }

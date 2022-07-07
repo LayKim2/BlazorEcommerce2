@@ -1,0 +1,59 @@
+﻿@inject NavigationManager NavigationManager
+@inject IProductService ProductService
+
+<div class="input-group">
+    <input  @bind-value="searchText"
+            @bind-value:event="oninput"
+            type="search"
+            list="products"
+            @onkeyup="HandlerSearch"
+            class="form-control"
+            placeholder="Search..."
+            @ref="searchInput" />
+
+    @*위에 list="products"가 가리키는 element*@
+    <datalist id="products">
+        @foreach(var suggestion in suggestions)
+        {
+            <option>@suggestion</option>
+        }
+    </datalist>
+    <div class="input-group-append">
+        <button class="btn btn-primary" @onclick="SearchProducts">
+            <span class="oi oi-magnifying-glass"></span>
+        </button>
+    </div>
+</div>
+
+@code {
+    private string searchText = string.Empty;
+    private List<string> suggestions = new();
+    protected ElementReference searchInput; // ref hook이랑 동일
+
+    // 나중에 DOM이 update 되었을때
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        // firstRender: 처음 렌더링될때만 true
+        if (firstRender)
+        {
+            await searchInput.FocusAsync();
+        }
+    }
+
+    public void SearchProducts()
+    {
+        NavigationManager.NavigateTo($"search/{searchText}");
+    }
+
+    public async Task HandlerSearch(KeyboardEventArgs args)
+    {
+        // key = null : when you select suggestion
+        if(args.Key == null || args.Key.Equals("Enter"))
+        {
+            SearchProducts();
+        } else if(searchText.Length > 1)
+        {
+            suggestions = await ProductService.GetProductSearchSuggestions(searchText);
+        }
+    }
+}

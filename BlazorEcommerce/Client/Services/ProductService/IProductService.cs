@@ -5,10 +5,15 @@ public interface IProductService
     event Action ProductsChanged;
     List<Product> Products { get; set; }
 
+    string Message { get; set; }
+
     //Task GetProducts();
     Task GetProducts(string? category = null);
 
     Task<ServiceResponse<Product>> GetProduct(int productId);
 
-    Task<ServiceResponse<Product>> SearchProducts(string searchText);
+    //Task<ServiceResponse<Product>> SearchProducts(string searchText);
+
+    Task SearchProducts(string searchText);
+    Task<List<string>> GetProductSearchSuggestions(string searchText);
 }
