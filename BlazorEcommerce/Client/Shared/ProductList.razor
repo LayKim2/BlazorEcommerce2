@@ -2,7 +2,7 @@
 @inject IProductService ProductService
 @implements IDisposable
 
-@if(ProductService.Products == null || ProductService.Products.Count == 0)
+@if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
     <span>@ProductService.Message</span>
 }
@@ -30,6 +30,15 @@ else
             </li>
         }
     </ul>
+
+    // pagination
+    @for (var i = 1; i <= ProductService.PageCount; i++)
+    {
+        <a class="btn
+            @(i == ProductService.CurrentPage ? "btn-info" : "btn-outline-info")
+            page-selection"
+            href="/search/@ProductService.LastSearchText/@i">@i</a>
+    }
 }
 
 
@@ -73,6 +82,6 @@ else
             return $"${variants[0].Price}";
         }
         decimal minPrice = variants.Min(v => v.Price);
-            return $"Starting at ${minPrice}";
+        return $"Starting at ${minPrice}";
     }
 }
