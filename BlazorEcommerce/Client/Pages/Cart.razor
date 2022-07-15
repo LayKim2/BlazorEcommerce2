@@ -1,0 +1,14 @@
+﻿@page "/cart"
+@inject ICartService CartService
+
+
+
+@code {
+    List<CartProductResponse> CartProducts = null;
+
+    string message = "Loading cart...";
+
+    protected override async Task OnInitializedAsync() {
+
+    }
+}

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.6" PrivateAssets="all" />
   </ItemGroup>
@@ -20,6 +21,8 @@
 		<Using Include="System.Net.Http.Json" />
 		<Using Include="BlazorEcommerce.Client.Services.ProductService" />
 		<Using Include="BlazorEcommerce.Client.Services.CategoryService" />
+		<Using Include="BlazorEcommerce.Client.Services.CartService"/>
+		<Using Include="Blazored.LocalStorage" />
 	</ItemGroup>
 
 </Project>

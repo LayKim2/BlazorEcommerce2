@@ -1,5 +1,6 @@
 ﻿@page "/product/{id:int}"
 @inject IProductService ProductService
+@inject ICartService CartService
 
 @if (product == null)
 {
@@ -14,11 +15,11 @@ else
         <div class="media-body">
             <h2 class="mb-0">@product.Ttile</h2>
             <p>@product.Description</p>
-            @if(product.Variants != null && product.Variants.Count > 1)
+            @if (product.Variants != null && product.Variants.Count > 1)
             {
                 <div class="mb-3">
                     <select class="form-select" @bind="currentTypeId">
-                        @foreach(var variant in product.Variants)
+                        @foreach (var variant in product.Variants)
                         {
                             <option value="@variant.ProductTypeId">@variant.ProductType.Name</option>
                         }
@@ -39,6 +40,9 @@ else
                 </h4>
             }
 
+            <button class="btn btn-primary" @onclick="AddToCart">
+                <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
+            </button>
         </div>
     </div>
 }
@@ -51,8 +55,6 @@ else
 
     [Parameter]
     public int Id { get; set; }
-
-
 
 
     protected override async Task OnParametersSetAsync()
@@ -81,5 +83,17 @@ else
     {
         var variant = product.Variants.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
         return variant;
+    }
+
+    private async Task AddToCart()
+    {
+        var productVariant = GetSelectedVariant();
+        var cartItem = new CartItem
+            {
+                ProductId = productVariant.ProductId,
+                ProductTypeId = productVariant.ProductTypeId
+            };
+
+        await CartService.AddToCart(cartItem);
     }
 }

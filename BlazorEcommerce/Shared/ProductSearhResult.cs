@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorEcommerce.Shared
 {
+    // DTO
     public class ProductSearhResult
     {
         public List<Product> Products { get; set; } = new ();
