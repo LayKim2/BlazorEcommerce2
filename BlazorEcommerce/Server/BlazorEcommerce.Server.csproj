@@ -26,10 +26,15 @@
 		<Using Include="Microsoft.EntityFrameworkCore" />
 		<Using Include="BlazorEcommerce.Shared" />
 		<Using Include="BlazorEcommerce.Server.Data" />
-		<Using Include="BlazorEcommerce.Server.Services.ProductService" />
-		<Using Include="BlazorEcommerce.Server.Services.CategoryService" />
-		<Using Include="BlazorEcommerce.Server.Services.CartService"/>
 	</ItemGroup>
 
+	<!--DI-->
+	<ItemGroup>
+		<Using Include="BlazorEcommerce.Server.Services.ProductService" />
+		<Using Include="BlazorEcommerce.Server.Services.CategoryService" />
+		<Using Include="BlazorEcommerce.Server.Services.CartService" />
+		<Using Include="BlazorEcommerce.Server.Services.AuthService"/>
+	</ItemGroup>
+	<!--DI-->
 
 </Project>

@@ -19,10 +19,17 @@
 	<ItemGroup>
 		<Using Include="BlazorEcommerce.Shared" />
 		<Using Include="System.Net.Http.Json" />
-		<Using Include="BlazorEcommerce.Client.Services.ProductService" />
-		<Using Include="BlazorEcommerce.Client.Services.CategoryService" />
-		<Using Include="BlazorEcommerce.Client.Services.CartService"/>
 		<Using Include="Blazored.LocalStorage" />
 	</ItemGroup>
+
+	<!--DI-->
+	<ItemGroup>
+		<Using Include="BlazorEcommerce.Client.Services.ProductService" />
+		<Using Include="BlazorEcommerce.Client.Services.CategoryService" />
+		<Using Include="BlazorEcommerce.Client.Services.CartService" />
+		<Using Include="BlazorEcommerce.Client.Services.CartService" />
+		<Using Include="BlazorEcommerce.Client.Services.AuthService"/>
+	</ItemGroup>
+	<!--DI-->
 
 </Project>

@@ -1,5 +1,7 @@
 // github.com/patrickgod/BlazorEcommerce
 
+using BlazorEcommerce.Server.Services.AuthService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // DbContext
@@ -20,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
