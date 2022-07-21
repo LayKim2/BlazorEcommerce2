@@ -37,6 +37,13 @@
         if (result.Success)
         {
             errorMessage = string.Empty;
+
+            await LocalStorage.SetItemAsync("autoToken", result.Data);
+            NavigationManager.NavigateTo("");
+        }
+        else
+        {
+            errorMessage = result.Message;
         }
         //Console.WriteLine("Log me in! :)");
     }
