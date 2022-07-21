@@ -35,6 +35,22 @@
             OnChange.Invoke();
         }
 
+
+        //public async Task AddToCart<T>(string listName, T item)
+        //{
+        //    List<T> list = await _localStorage.GetItemAsync<List<T>>(listName);
+
+        //    if (list is null)
+        //        list = new();
+
+        //    list.Add(item);
+
+        //    await _localStorage.SetItemAsync(listName, list);
+
+        //    OnChange.Invoke();
+        //}
+
+
         public async Task<List<CartItem>> GetCartItems()
         {
             var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
