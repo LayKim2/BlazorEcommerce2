@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.6" PrivateAssets="all" />
   </ItemGroup>
@@ -18,8 +19,6 @@
 
 	<ItemGroup>
 		<Using Include="BlazorEcommerce.Shared" />
-		<Using Include="System.Net.Http.Json" />
-		<Using Include="Blazored.LocalStorage" />
 	</ItemGroup>
 
 	<!--DI-->
@@ -28,8 +27,16 @@
 		<Using Include="BlazorEcommerce.Client.Services.CategoryService" />
 		<Using Include="BlazorEcommerce.Client.Services.CartService" />
 		<Using Include="BlazorEcommerce.Client.Services.CartService" />
-		<Using Include="BlazorEcommerce.Client.Services.AuthService"/>
+		<Using Include="BlazorEcommerce.Client.Services.AuthService" />
 	</ItemGroup>
 	<!--DI-->
+
+	<!--Nuget-->
+	<ItemGroup>
+		<Using Include="System.Net.Http.Json" />
+		<Using Include="Blazored.LocalStorage" />
+		<Using Include="Microsoft.AspNetCore.Components.Authorization"/>
+	</ItemGroup>
+	<!--Nuget-->
 
 </Project>
