@@ -15,6 +15,7 @@ namespace BlazorEcommerce.Client
             _http = http;
         }
 
+        // get auth token from local storage.
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             string authToken = await _localStorageService.GetItemAsStringAsync("authToken");
@@ -23,7 +24,7 @@ namespace BlazorEcommerce.Client
 
             // set a default request header for the authorizaition header
             // need http client 
-
+                         
             _http.DefaultRequestHeaders.Authorization = null;
             // currently in this state, the user is unauthorized.
 

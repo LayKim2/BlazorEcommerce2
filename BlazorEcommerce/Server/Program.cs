@@ -65,11 +65,11 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-app.UseAuthentication(); // authentication middleware
-app.UseAuthorization(); // Authorization middleware
-
 app.UseRouting();
 
+// 반드시 UseRouting 이후에!
+app.UseAuthentication(); // authentication middleware
+app.UseAuthorization(); // Authorization middleware
 
 app.MapRazorPages();
 app.MapControllers();
