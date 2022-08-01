@@ -70,9 +70,10 @@ namespace BlazorEcommerce.Server.Services.CartService
             _context.CartItems.AddRange(cartItems); // TODO addRange할 때는 async/await를 안쓰네??
             await _context.SaveChangesAsync();
 
-            return await GetCartProducts(
-                await _context.CartItems
-                .Where(ci => ci.UserId == GetUserId()).ToListAsync());
+            //return await GetCartProducts(
+            //    await _context.CartItems
+            //    .Where(ci => ci.UserId == GetUserId()).ToListAsync());
+            return await GetDbCartProducts();
         }
 
         public async Task<ServiceResponse<int>> GetCartItemsCount()
@@ -85,5 +86,32 @@ namespace BlazorEcommerce.Server.Services.CartService
 
             };
         }
-    }
+
+        public async Task<ServiceResponse<List<CartProductResponse>>> GetDbCartProducts()
+        {
+            return await GetCartProducts(await _context.CartItems
+                .Where(ci => ci.UserId == GetUserId()).ToListAsync());
+        }
+
+        public async Task<ServiceResponse<bool>> AddToCart(CartItem cartItem)
+        {
+            cartItem.UserId = GetUserId();
+
+            var sameItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
+                ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == cartItem.UserId);
+
+            if(sameItem == null)
+            {
+                _context.CartItems.Add(cartItem);
+            } else
+            {
+                sameItem.Quantity += cartItem.Quantity;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<bool> { Data = true };
+        }
+    } 
 }
