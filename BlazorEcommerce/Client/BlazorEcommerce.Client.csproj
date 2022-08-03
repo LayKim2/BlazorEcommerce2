@@ -29,6 +29,7 @@
 		<Using Include="BlazorEcommerce.Client.Services.CartService" />
 		<Using Include="BlazorEcommerce.Client.Services.CartService" />
 		<Using Include="BlazorEcommerce.Client.Services.AuthService" />
+		<Using Include="BlazorEcommerce.Client.Services.OrderService" />
 	</ItemGroup>
 	<!--DI-->
 

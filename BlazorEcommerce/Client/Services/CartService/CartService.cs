@@ -16,6 +16,11 @@
             _authStateProvider = authStateProvider;
         }
 
+        private async Task<bool> IsAuthenticated()
+        {
+            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
+        }
+
         public async Task AddToCart(CartItem cartItem)
         {
             if (await IsAuthenticated())
@@ -199,11 +204,6 @@
             }
 
             
-        }
-
-        private async Task<bool> IsAuthenticated()
-        {
-            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
         }
 
     }

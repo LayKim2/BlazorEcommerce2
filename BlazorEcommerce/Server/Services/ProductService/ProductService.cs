@@ -84,8 +84,8 @@
 
             foreach(var product in products)
             {
-                if (product.Ttile.Contains(searchText, StringComparison.OrdinalIgnoreCase)){
-                    result.Add(product.Ttile);
+                if (product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase)){
+                    result.Add(product.Title);
                 }
 
                 if(product.Description != null)
@@ -116,7 +116,7 @@
             var pageResults = 2f;
             var pageCount = Math.Ceiling((await FindProductsBySearchText(searchText)).Count / pageResults);
             var products = await _context.Products
-                                .Where(p => p.Ttile.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower()))
+                                .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower()))
                                 //.Where(p => searchText.Contains(p.Ttile) || searchText.Contains(p.Description))
                                 .Include(p => p.Variants)
                                 .Skip((page - 1) * (int)pageResults)
@@ -147,7 +147,7 @@
         private async Task<List<Product>> FindProductsBySearchText(string searchText)
         {
             return await _context.Products
-                                .Where(p => p.Ttile.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower()))
+                                .Where(p => p.Title.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower()))
                                 //.Where(p => searchText.Contains(p.Ttile) || searchText.Contains(p.Description))
                                 .Include(p => p.Variants)
                                 .ToListAsync();
