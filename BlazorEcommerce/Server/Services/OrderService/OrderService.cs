@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using BlazorEcommerce.Shared;
+using System.Security.Claims;
 
 namespace BlazorEcommerce.Server.Services.OrderService
 {
@@ -15,6 +16,47 @@ namespace BlazorEcommerce.Server.Services.OrderService
             _context = context;
             _cartService = cartService;
             _authService = authService;
+        }
+
+        public async Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(int orderId)
+        {
+            var response = new ServiceResponse<OrderDetailsResponse>();
+            var order = await _context.Orders
+                    .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                    .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.ProductType)
+                    .Where(o => o.UserId == _authService.GetUserId() && o.Id == orderId)
+                    .OrderByDescending(o => o.OrderDate)
+                    .FirstOrDefaultAsync();
+
+            if(order == null)
+            {
+                response.Success = false;
+                response.Message = "Order not found.";
+                return response;
+            }
+
+            var orderDetailsResponse = new OrderDetailsResponse
+            {
+                OrderDate = order.OrderDate,
+                TotalPrice = order.TotalPrice,
+                Products = new List<OrderDetailsProductResponse>(),
+            };
+
+            order.OrderItems.ForEach(oi => orderDetailsResponse.Products.Add( new OrderDetailsProductResponse
+            {
+                ProductId = oi.ProductId,
+                ImageUrl = oi.Product.ImageUrl,
+                ProductType = oi.ProductType.Name,
+                Quantity = oi.Quantity,
+                Title = oi.Product.Title,
+                TotalPrice = oi.TotalPrice,
+            }));
+
+            response.Data = orderDetailsResponse;
+
+            return response;
         }
 
         public async Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrders()
