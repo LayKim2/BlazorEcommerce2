@@ -15,13 +15,13 @@ namespace BlazorEcommerce.Server.Controllers
         }
 
         // PlaceOrder를 하는데 parameter하나 없이 하네.. 미쳤네
-        [HttpPost]
-        public async Task<ActionResult<ServiceResponse<bool>>> PlaceOrder()
-        {
-            var result = await _orderService.PlaceOrder();
+        //[HttpPost]
+        //public async Task<ActionResult<ServiceResponse<bool>>> PlaceOrder()
+        //{
+        //    var result = await _orderService.PlaceOrder();
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<OrderOverviewResponse>>>> GetOrder()
