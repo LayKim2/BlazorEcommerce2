@@ -10,8 +10,19 @@
 
 @if (CartProducts == null || CartProducts.Count == 0)
 {
-    <span>@message</span>
-} 
+    <div>
+        <div class="text-center pt-3" style="color: purple; font-size: 16pt">
+            @message
+        </div>
+        <div class="text-center mt-3">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              style="font-size: 16pt; width: 36px; height: 36px; color: purple" />
+        </div>
+        <div class="text-center">
+            <img src="/images/blazor-logo.png" style=" width: 5%;" />
+        </div>
+    </div>
+}
 @*else if (orderPalced)
 {
     <span>Thank you for your order! you can check your orders <a href="orders">here</a></span>
@@ -78,7 +89,7 @@ else
         await CartService.GetCartItemsCount();
         CartProducts = await CartService.GetCartProducts();
 
-        if(CartProducts == null || CartProducts.Count == 0)
+        if (CartProducts == null || CartProducts.Count == 0)
         {
             message = "Your cart is Empty.";
         }

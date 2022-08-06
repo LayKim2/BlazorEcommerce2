@@ -3,7 +3,18 @@
 
 @if(orders == null)
 {
-    <span>Loading your orders...</span>
+    <div>
+        <div class="text-center pt-3" style="color: purple; font-size: 16pt">
+            Loading your orders...
+        </div>
+        <div class="text-center mt-3">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+              style="font-size: 16pt; width: 36px; height: 36px; color: purple" />
+        </div>
+        <div class="text-center">
+            <img src="/images/blazor-logo.png" style=" width: 5%;" />
+        </div>
+    </div>
 } else if(orders.Count() == 0)
 {
     <span>You have no orders, yet</span>
