@@ -38,6 +38,7 @@
 		<Using Include="BlazorEcommerce.Server.Services.AuthService" />
 		<Using Include="BlazorEcommerce.Server.Services.OrderService" />
 		<Using Include="BlazorEcommerce.Server.Services.PaymentService" />
+		<Using Include="BlazorEcommerce.Server.Services.AddressService" />
 	</ItemGroup>
 	<!--DI-->
 
