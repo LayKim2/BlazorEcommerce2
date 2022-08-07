@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BlazorEcommerce.Shared": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
