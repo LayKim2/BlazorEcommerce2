@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/mynameisharu/databases/blazorecommerce",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
+    },
+    "identityapp1": {
+      "ignored": "true",
+      "type": "identityapp"
+    },
+    "apis2": {
+      "apiEndpoint": "https://blazorecommerceserverapi2.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/BlazorEcommerceServerapi2/apis/BlazorEcommerceServer",
+      "type": "apis.azure"
+    },
+    "mssql2": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:BlazorEcommerceContext"
+    }
+  }
+}
