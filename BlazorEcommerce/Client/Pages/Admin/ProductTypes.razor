@@ -1,0 +1,41 @@
+﻿@page "/admin/product-type"
+@inject IProductTypeService ProductTypeService
+
+<h3>ProductTypes</h3>
+
+@foreach (var productType in ProductTypeService.ProductTypes)
+{
+    @if (productType.Editing)
+    {
+        
+    }
+    else
+    {
+        
+    }
+}
+
+@code {
+    ProductType editingProductType = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductTypeService.GetProductTypes();
+    }
+
+    private void EditProductType(ProductType productType)
+    {
+        productType.Editing = true;
+        editingProductType = productType;
+    }
+
+    private void CreateNewProductType()
+    {
+
+    }
+
+    private async Task UpdateProductType()
+    {
+        
+    }
+}
