@@ -4,6 +4,7 @@ public interface IProductService
 {
     event Action ProductsChanged;
     List<Product> Products { get; set; }
+    List<Product> AdminProducts { get; set; }
 
     string Message { get; set; }
 
@@ -17,6 +18,7 @@ public interface IProductService
 
     //Task GetProducts();
     Task GetProducts(string? category = null);
+    Task GetAdminProducts();
 
     Task<ServiceResponse<Product>> GetProduct(int productId);
 
@@ -24,4 +26,5 @@ public interface IProductService
 
     Task SearchProducts(string searchText, int page);
     Task<List<string>> GetProductSearchSuggestions(string searchText);
+
 }
