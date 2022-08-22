@@ -79,13 +79,25 @@ else
         <hr />
         <div class="mb-0">
             <label for="category">Category</label>
-            @*<InputText id="category" @bind-Value="product.CategoryId" class="form-control">
+            <InputSelect id="category" class="form-control" @bind-Value="product.CategoryId">
                 @foreach (var category in CategoryService.AdminCategories)
-               {
-                    <option value="@category.Id">@category.Name</option>   
-               }
-            </InputText>*@
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </InputSelect>
         </div>
+        <hr />
+        <div class="form-check">
+            <InputCheckbox id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
+            <label for="featured" class="form-check-label">Featured</label>
+        </div>
+        <div class="form-check">
+            <InputCheckbox id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
+            <label for="visible" class="form-check-label">Visible</label>
+        </div>
+        <hr />
+        <button type="submit" class="btn btn-primary float-end">Update Product</button>
+        <ValidationSummary></ValidationSummary>
     </EditForm>
 }
 @code {
@@ -147,8 +159,19 @@ else
         product.Variants.Add(new ProductVariant { IsNew = true, ProductId = product.Id });
     }
 
-    void AddOrUpdateProduct()
+    async void AddOrUpdateProduct()
     {
-
+        // add
+        if( product.IsNew)
+        {
+            var result = await ProductService.CreateProduct(product);
+            NavigationManager.NavigateTo($"admin/product/{result.Id}");
+        }
+        else // edit
+        {
+            product.IsNew = false;
+            product = await ProductService.UpdateProduct(product);
+            NavigationManager.NavigateTo($"admin/product/{product.Id}", true);
+        }
     }
 }

@@ -223,10 +223,13 @@
             dbProduct.ImageUrl = product.ImageUrl;
             dbProduct.CategoryId = product.CategoryId;
             dbProduct.Visible = product.Visible;
+            dbProduct.Featured = product.Featured;
 
             foreach(var variant in product.Variants)
             {
-                var dbVariant = await _context.ProductVariants.SingleOrDefaultAsync(v => v.ProductId == variant.ProductId && v.ProductTypeId == variant.ProductTypeId);
+                var dbVariant = await _context.ProductVariants
+                    .SingleOrDefaultAsync(v => v.ProductId == variant.ProductId 
+                                            && v.ProductTypeId == variant.ProductTypeId);
 
                 if(dbVariant == null)
                 {
@@ -235,7 +238,7 @@
                 }
                 else
                 {
-                    dbVariant.ProductTypeId = variant.ProductId;
+                    dbVariant.ProductTypeId = variant.ProductTypeId;
                     dbVariant.Price = variant.Price;
                     dbVariant.OriginalPrice = variant.OriginalPrice;
                     dbVariant.Visible = variant.Visible;
