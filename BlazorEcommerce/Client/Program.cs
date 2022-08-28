@@ -9,6 +9,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // Blazored.LocalStorage
 builder.Services.AddBlazoredLocalStorage();
 
+// mudblazor
+builder.Services.AddMudServices();
+
+
 // DI(Dependency Injection)
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IProductService, ProductService>();
