@@ -25,13 +25,13 @@
 
 	protected override async Task OnParametersSetAsync()
 	{
-		if (SearchText != null)
+		if (String.IsNullOrEmpty(SearchText))
 		{
-			await ProductService.SearchProducts(SearchText, Page);
+			await ProductService.GetProducts(CategoryUrl);
 		}
 		else
 		{
-			await ProductService.GetProducts(CategoryUrl);
+			await ProductService.SearchProducts(SearchText, Page);
 		}
 	}
 }

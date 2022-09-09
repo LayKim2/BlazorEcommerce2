@@ -3,14 +3,26 @@
 @attribute [Authorize]
 
 <AuthorizeView>
-    <h3>Hi! You`re logged in with <i>@context.User.Identity.Name</i></h3>
+    @*<h3>Hi! You`re logged in with <i>@context.User.Identity.Name</i></h3>*@
+    <RadzenCard class="m-3">
+        <h3 class="h5"><b>Profile</b></h3>
+        <div class="d-flex flex-row">
+            <RadzenImage Path="https://cdn1.vectorstock.com/i/1000x1000/42/60/round-red-background-vector-9254260.jpg" Class="rounded-circle float-left mr-3" Style="width: 100px; height: 100px;" />
+            <div>
+                <div>Email</div>
+                <b>@context.User.Identity.Name</b>
+                <div class="mt-3">Phone Number</div>
+                <b></b>
+            </div>
+        </div>
+    </RadzenCard>
 </AuthorizeView>
 
-<h5>Delivery Address</h5>
+<h5><b>Delivery Address</b></h5>
 <AddressForm />
 <p></p>
 
-<h5>Change Password</h5>
+<h5><b>Change Password</b></h5>
 
 <EditForm Model="request" OnValidSubmit="ChangePassword">
     <DataAnnotationsValidator />
